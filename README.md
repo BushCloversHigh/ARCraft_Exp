@@ -67,11 +67,11 @@ You are now ready to build!
 
 ## License
 
-This project is released under the Apache License Version 2.0, see LICENSE.
+This project is released under the Apache License Version 2.0, see [LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE).
 
 ***
 
-このプロジェクトはApache License Version 2.0のオープンソースライセンスの元公開しています。詳しくはLICENSEをみてください。
+このプロジェクトはApache License Version 2.0のオープンソースライセンスの元公開しています。詳しくは[LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE)をみてください。
 
 ## Authors
 

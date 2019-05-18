@@ -31,7 +31,7 @@ ARCoreのアプリケーションを開発できる環境と動作するデバ�
 
 1. Download this project.
 2. Open the downloaded project in Unity.
-3. Download the UnityPackage from [ARCore SDK for Unity 1.9.0] (https://github.com/google-ar/arcore-unity-sdk/releases).
+3. Download the UnityPackage from [ARCore SDK for Unity 1.9.0](https://github.com/google-ar/arcore-unity-sdk/releases).
 4. Import the downloaded ARCore UnityPackage.
 5. If you are using Unity 2019.x, install "Multiplayer HLAPI" and "XR Legacy Input Helper" from Window> PackageManager.
 

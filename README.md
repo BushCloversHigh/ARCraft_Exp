@@ -82,4 +82,4 @@ Geatnium ([Twitter](https://twitter.com/geatnium))
 ## References
 
 * ARCore, Google, https://developers.google.com/ar/ (2019/5/19)
-* ARCoreを簡単にUnityで始める, Qiita, https://qiita.com/norihirosunada/items/4fad091c152249fe53f1 (2019/5/19)
+* ARCoreを簡単にUnityで始める, norihirosunada, Qiita, https://qiita.com/norihirosunada/items/4fad091c152249fe53f1 (2019/5/19)

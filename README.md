@@ -72,3 +72,12 @@ This project is released under the Apache License Version 2.0, see LICENSE.
 ***
 
 このプロジェクトはApache License Version 2.0のオープンソースライセンスの元公開しています。詳しくはLICENSEをみてください。
+
+## Authors
+
+Geatnium ([Twitter](https://twitter.com/geatnium))
+
+## References
+
+* ARCore, Google, https://developers.google.com/ar/ (2019/5/19)
+* ARCoreを簡単にUnityで始める, Qiita, https://qiita.com/norihirosunada/items/4fad091c152249fe53f1 (2019/5/19)

@@ -67,3 +67,8 @@ You are now ready to build!
 
 ## License
 
+This project is released under the Apache License Version 2.0, see LICENSE.
+
+***
+
+このプロジェクトはApache License Version 2.0のオープンソースライセンスの元公開しています。詳しくはLICENSEをみてください。

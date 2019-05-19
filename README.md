@@ -69,11 +69,15 @@ You are now ready to build!
 
 ## License
 
-This project is released under the Apache License Version 2.0, see [LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE).
+This project is a former release of CC0 1.0 Universal and can be freely used. Please see [LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE) for details.  
+However, please note that Google ARCore is Apache License Version 2.0.  
+[ARCore LICENSE](https://github.com/google-ar/arcore-unity-sdk/blob/master/LICENSE)
 
 ***
 
-このプロジェクトはApache License Version 2.0のオープンソースライセンスの元公開しています。詳しくは[LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE)をみてください。
+このプロジェクトは CC0 1.0 Universal の元公開しているため、ご自由に利用できます。詳しくは[LICENSE](https://github.com/BushCloversHigh/ARCraft_Exp/blob/master/LICENSE)をみてください。  
+ただし、Google ARCoreはApache License Version 2.0ですので、注意してください。  
+[ARCoreのLICENSE](https://github.com/google-ar/arcore-unity-sdk/blob/master/LICENSE)
 
 ## Authors
 

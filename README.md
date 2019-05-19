@@ -27,7 +27,7 @@ ARCoreのアプリケーションを開発できる環境と動作するデバ�
 (ご使用のスマートフォンがARCoreをサポートしているかについて、特に注目してください。)  
 [ARCore Unity for Android](https://developers.google.com/ar/develop/unity/quickstart-android)
 
-## SetUp
+## Setup
 
 1. Download this project.
 2. Open the downloaded project in Unity.
@@ -79,7 +79,7 @@ However, please note that Google ARCore is Apache License Version 2.0.
 ただし、Google ARCoreはApache License Version 2.0ですので、注意してください。  
 [ARCoreのLICENSE](https://github.com/google-ar/arcore-unity-sdk/blob/master/LICENSE)
 
-## Authors
+## Author
 
 Geatnium ([Twitter](https://twitter.com/geatnium))
 

@@ -58,6 +58,36 @@ public class CraftController : MonoBehaviour
         }
     }
 
+    private float t = 0;
+    private GameObject deleteBlock;
+    public void DeleteBlock (Vector3 touchPos)
+    {
+        Ray camRay = Camera.main.ScreenPointToRay (touchPos);
+        RaycastHit hit;
+
+        if (Physics.Raycast (camRay, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag ("Block"))
+            {
+                if (deleteBlock == hit.collider.gameObject)
+                {
+                    t += Time.deltaTime;
+                    if(t > 0.5f)
+                    {
+                        Destroy (deleteBlock);
+                        deleteBlock = null;
+                        t = 0;
+                    }
+                }
+                else
+                {
+                    t = 0;
+                    deleteBlock = hit.collider.gameObject;
+                }
+            }
+        }
+    }
+
     public void ChangeScale (float scaleDelta)
     {
         Vector3 scale = putedBlocks.localScale + Vector3.one * scaleDelta * 0.01f;

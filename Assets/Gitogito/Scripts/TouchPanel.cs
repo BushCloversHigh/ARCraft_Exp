@@ -10,10 +10,13 @@ public class TouchPanel : MonoBehaviour, IPointerDownHandler
 
     private float scale1, scale2;
 
+    float t = 0;
+
     private void Update ()
     {
         if(Input.touchCount == 0)
         {
+            t = 0;
             isTouching = false;
             isDouble = false;
             return;
@@ -30,11 +33,19 @@ public class TouchPanel : MonoBehaviour, IPointerDownHandler
             {
                 return;
             }
-
             Touch touch = Input.GetTouch (0);
-            if (touch.phase == TouchPhase.Ended)
+            t += Time.deltaTime;
+            if (t < 0.1f)
             {
-                craftController.PutBlock (touch.position);
+                if (touch.phase == TouchPhase.Ended)
+                {
+                    t = 0;
+                    craftController.PutBlock (touch.position);
+                }
+            }
+            else
+            {
+                craftController.DeleteBlock (touch.position);
             }
         }
         else if (Input.touchCount == 2)

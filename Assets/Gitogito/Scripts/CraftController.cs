@@ -4,56 +4,43 @@ public class CraftController : MonoBehaviour
 {
 
     [SerializeField] private GameObject currentBlock;
-    private MeshRenderer meshRenderer;
+    private Renderer meshRenderer;
 
     [SerializeField] private GameObject blocksContent;
-    private BlockElement[] blockElements;
 
-    [SerializeField] private Transform putedBlocks;
+    private Transform blocksParent;
 
     private Transform mainCam;
-
-    private bool firstPut = false;
-
+    
     private void Awake ()
     {
-        meshRenderer = currentBlock.GetComponent<MeshRenderer> ();
-        blockElements = blocksContent.GetComponentsInChildren<BlockElement> ();
-
+        meshRenderer = currentBlock.GetComponent<Renderer> ();
         mainCam = Camera.main.transform;
+
+        blocksParent = GameObject.FindWithTag ("BlocksParent").transform;
     }
 
-    public void ChangeBlock (Material colorMat, int which)
+    public void ChangeBlock (Material colorMat)
     {
         meshRenderer.material = colorMat;
-        for (int i = 0 ; i < blockElements.Length ; i++)
-        {
-            if(i == which)
-            {
-                continue;
-            }
-            blockElements[i].UnSelect ();
-        }
     }
 
     public void PutBlock (Vector3 touchPos)
     {
         Ray camRay = Camera.main.ScreenPointToRay (touchPos);
-        RaycastHit hit;
 
-        if(Physics.Raycast(camRay, out hit))
+        if (Physics.Raycast (camRay, out RaycastHit hit))
         {
-            if (!firstPut)
+            if (blocksParent.transform.position == Vector3.zero)
             {
-                firstPut = true;
-                putedBlocks.transform.position = hit.point;
+                blocksParent.transform.position = hit.point;
             }
-            GameObject go_block = Instantiate (currentBlock, putedBlocks);
+            GameObject go_block = Instantiate (currentBlock, blocksParent);
             go_block.transform.eulerAngles = Vector3.zero;
-            go_block.transform.localScale = Vector3.one + Vector3.one * 0.001f;
+            go_block.transform.localScale = Vector3.one * 1.001f;
             go_block.transform.position = hit.point;
             Vector3 localPos = go_block.transform.localPosition;
-            localPos = new Vector3 (RoundToInt (localPos.x), FloorToInt (localPos.y) + 0.5f, RoundToInt (localPos.z));
+            localPos = new Vector3 (Round (localPos.x), Floor (localPos.y) + 0.5f, Round (localPos.z));
             go_block.transform.localPosition = localPos;
         }
     }
@@ -63,47 +50,48 @@ public class CraftController : MonoBehaviour
     public void DeleteBlock (Vector3 touchPos)
     {
         Ray camRay = Camera.main.ScreenPointToRay (touchPos);
-        RaycastHit hit;
 
-        if (Physics.Raycast (camRay, out hit))
+        if (Physics.Raycast (camRay, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.CompareTag ("Block"))
+            if (hit.collider.gameObject.CompareTag ("Block") && deleteBlock == hit.collider.gameObject)
             {
-                if (deleteBlock == hit.collider.gameObject)
+                t += Time.deltaTime;
+                if (t > 0.5f)
                 {
-                    t += Time.deltaTime;
-                    if(t > 0.5f)
-                    {
-                        Destroy (deleteBlock);
-                        deleteBlock = null;
-                        t = 0;
-                    }
-                }
-                else
-                {
+                    Destroy (deleteBlock);
+                    deleteBlock = null;
                     t = 0;
-                    deleteBlock = hit.collider.gameObject;
                 }
             }
+            else
+            {
+                t = 0;
+                deleteBlock = hit.collider.gameObject;
+            }
+
         }
     }
 
     public void ChangeScale (float scaleDelta)
     {
-        Vector3 scale = putedBlocks.localScale + Vector3.one * scaleDelta * 0.01f;
-        scale.x = Mathf.Clamp (scale.x, 0.1f, 1f);
-        scale.y = Mathf.Clamp (scale.y, 0.1f, 1f);
-        scale.z = Mathf.Clamp (scale.z, 0.1f, 1f);
-
-        putedBlocks.localScale = scale;
+        Vector3 scale = ClampXYZ (blocksParent.localScale + Vector3.one * scaleDelta * 0.01f, 0.1f, 1f);
+        blocksParent.localScale = scale;
     }
 
-    private float RoundToInt (float f)
+    private Vector3 ClampXYZ (Vector3 vector3, float min, float max)
+    {
+        vector3.x = Mathf.Clamp (vector3.x, min, max);
+        vector3.y = Mathf.Clamp (vector3.y, min, max);
+        vector3.z = Mathf.Clamp (vector3.z, min, max);
+        return vector3;
+    }
+
+    private float Round (float f)
     {
         return Mathf.Round (f);
     }
 
-    private float FloorToInt (float f)
+    private float Floor (float f)
     {
         return Mathf.Floor (f);
     }

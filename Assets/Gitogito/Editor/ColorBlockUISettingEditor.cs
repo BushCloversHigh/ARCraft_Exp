@@ -10,7 +10,7 @@ public class ColorBlockUISettingEditor : Editor
 
         ColorBlockUISetting setting = target as ColorBlockUISetting;
 
-        if (GUILayout.Button ("GenerateBlockButtons"))
+        if (GUILayout.Button ("Generate Block Buttons"))
         {
             setting.GenerateBlockButtons ();
         }

@@ -4,9 +4,13 @@ using UnityEngine.UI;
 
 public class BlockElement : MonoBehaviour, IPointerClickHandler
 {
+    public static int currentBlock = 0;
+
     public Material colorMat;
     private Image back;
     private CraftController controller;
+
+    private Color unSelectColor = new Color (1, 1, 1, 0.2f), selectedColor = new Color (1, 1, 1, 0.7f);
 
     private void Awake ()
     {
@@ -18,16 +22,22 @@ public class BlockElement : MonoBehaviour, IPointerClickHandler
     {
         colorMat = color;
         transform.GetChild (0).GetComponent<Image> ().color = colorMat.color;
+        if(gameObject.name == "0")
+        {
+            back.color = selectedColor;
+        }
     }
 
     public void UnSelect ()
     {
-        back.color = new Color (1, 1, 1, 0.2f);
+        back.color = unSelectColor;
     }
 
     public void OnPointerClick (PointerEventData eventData)
     {
-        back.color = new Color (1, 1, 1, 0.7f);
-        controller.ChangeBlock (colorMat, int.Parse (gameObject.name));
+        transform.parent.GetChild (currentBlock).GetComponent<BlockElement> ().UnSelect ();
+        currentBlock = int.Parse (gameObject.name);
+        back.color = selectedColor;
+        controller.ChangeBlock (colorMat);
     }
 }

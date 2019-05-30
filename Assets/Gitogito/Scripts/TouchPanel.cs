@@ -6,11 +6,16 @@ public class TouchPanel : MonoBehaviour, IPointerDownHandler
 
     private bool isTouching = false, isDouble = false;
 
-    [SerializeField] private CraftController craftController;
+    private CraftController craftController;
 
     private float scale1, scale2;
 
     float t = 0;
+
+    private void Awake ()
+    {
+        craftController = GameObject.FindWithTag ("GameController").GetComponent<CraftController> ();
+    }
 
     private void Update ()
     {
@@ -35,7 +40,7 @@ public class TouchPanel : MonoBehaviour, IPointerDownHandler
             }
             Touch touch = Input.GetTouch (0);
             t += Time.deltaTime;
-            if (t < 0.1f)
+            if (t < 0.2f)
             {
                 if (touch.phase == TouchPhase.Ended)
                 {
@@ -45,7 +50,7 @@ public class TouchPanel : MonoBehaviour, IPointerDownHandler
             }
             else
             {
-                craftController.DeleteBlock (touch.position);
+                craftController.DestroyBlock (touch.position);
             }
         }
         else if (Input.touchCount == 2)

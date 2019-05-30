@@ -11,6 +11,10 @@ public class CraftController : MonoBehaviour
     private Transform blocksParent;
 
     private Transform mainCam;
+
+    private float blockScale = 1f;
+
+    private Message message;
     
     private void Awake ()
     {
@@ -18,6 +22,8 @@ public class CraftController : MonoBehaviour
         mainCam = Camera.main.transform;
 
         blocksParent = GameObject.FindWithTag ("BlocksParent").transform;
+
+        message = GameObject.Find ("UI/Panel").GetComponent<Message> ();
     }
 
     public void ChangeBlock (Material colorMat)
@@ -37,17 +43,24 @@ public class CraftController : MonoBehaviour
             }
             GameObject go_block = Instantiate (currentBlock, blocksParent);
             go_block.transform.eulerAngles = Vector3.zero;
-            go_block.transform.localScale = Vector3.one * 1.001f;
+            go_block.transform.localScale = Vector3.one * 1.0001f;
             go_block.transform.position = hit.point;
             Vector3 localPos = go_block.transform.localPosition;
-            localPos = new Vector3 (Round (localPos.x), Floor (localPos.y) + 0.5f, Round (localPos.z));
+            if (hit.collider.CompareTag ("ARPlane"))
+            {
+                localPos = new Vector3 (Round (localPos.x), Round (localPos.y) + 0.5f, Round (localPos.z));
+            }
+            else if(hit.collider.CompareTag ("Block"))
+            {
+                localPos = new Vector3 (Round (localPos.x), Floor (localPos.y) + 0.5f, Round (localPos.z));
+            }
             go_block.transform.localPosition = localPos;
         }
     }
 
     private float t = 0;
     private GameObject deleteBlock;
-    public void DeleteBlock (Vector3 touchPos)
+    public void DestroyBlock (Vector3 touchPos)
     {
         Ray camRay = Camera.main.ScreenPointToRay (touchPos);
 
@@ -74,8 +87,10 @@ public class CraftController : MonoBehaviour
 
     public void ChangeScale (float scaleDelta)
     {
-        Vector3 scale = ClampXYZ (blocksParent.localScale + Vector3.one * scaleDelta * 0.01f, 0.1f, 1f);
-        blocksParent.localScale = scale;
+        blockScale = Mathf.Clamp (blockScale + scaleDelta * 0.002f, 0.05f, 1f);
+        float scaleRound = Round (blockScale * 100f);
+        message.Show (string.Format ("Scale : {0:d} %", (int)scaleRound));
+        blocksParent.localScale = Vector3.one * scaleRound * 0.01f;
     }
 
     private Vector3 ClampXYZ (Vector3 vector3, float min, float max)

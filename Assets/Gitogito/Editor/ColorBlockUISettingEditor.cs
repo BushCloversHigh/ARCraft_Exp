@@ -14,6 +14,5 @@ public class ColorBlockUISettingEditor : Editor
         {
             setting.GenerateBlockButtons ();
         }
-
     }
 }

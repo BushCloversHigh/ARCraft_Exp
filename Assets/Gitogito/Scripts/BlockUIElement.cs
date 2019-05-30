@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BlockElement : MonoBehaviour, IPointerClickHandler
+public class BlockUIElement : MonoBehaviour, IPointerClickHandler
 {
     public static int currentBlock = 0;
 
@@ -35,7 +35,7 @@ public class BlockElement : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick (PointerEventData eventData)
     {
-        transform.parent.GetChild (currentBlock).GetComponent<BlockElement> ().UnSelect ();
+        transform.parent.GetChild (currentBlock).GetComponent<BlockUIElement> ().UnSelect ();
         currentBlock = int.Parse (gameObject.name);
         back.color = selectedColor;
         controller.ChangeBlock (colorMat);

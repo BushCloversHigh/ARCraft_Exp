@@ -19,7 +19,7 @@ public class ColorBlockUISetting : MonoBehaviour
         for (int i = 0 ; i < colorMats.Length ; i++)
         {
             GameObject go_element = Instantiate (elementObj, transform);
-            BlockElement blockElement = go_element.GetComponent<BlockElement> ();
+            BlockUIElement blockElement = go_element.GetComponent<BlockUIElement> ();
             blockElement.SetBlockColor (colorMats[i]);
             go_element.name = i.ToString ();
         }

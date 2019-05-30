@@ -15,7 +15,16 @@ public class ColliderUpdater : MonoBehaviour
         mesh = GetComponent<MeshFilter> ().mesh;
         renderer = GetComponent<Renderer> ();
         meshCollider = GetComponent<MeshCollider> ();
+
         isVisible = PlaneVisiblity.isVisible;
+        if (isVisible)
+        {
+            renderer.material = grid;
+        }
+        else
+        {
+            renderer.material = transparent;
+        }
     }
 
     private void Update ()
